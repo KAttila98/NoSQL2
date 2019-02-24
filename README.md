@@ -64,7 +64,7 @@ nincsenek megkötések arra vonatkozóan, hogy egy collection-be hány és milye
    favouriteAnimal: "cat"
 },
 {
-   firstName: Alíz,
+   firstName: "Alíz",
    email: "alíz@email.com",
    eyeColor: "Blue"
 },
@@ -97,7 +97,7 @@ db.getCollection('myCollection').find({eyeColor: "Blue"})
 
 // Eredmény
 {
-   firstName: Alíz,
+   firstName: "Alíz",
    email: "alíz@email.com",
    eyeColor: "Blue"
 },
@@ -161,9 +161,9 @@ PERSIST department
 Ebben az esetben a TTL már -1 értéket ad vissza.
 
 ```
-SCUBSCRIBE mychannel
+SUBSCRIBE mychannel
 PSUBSCRIBE my\*
-PUBLUSH mychannel “test message”
+PUBLISH mychannel “test message”
 ```
 
 **Példa lista műveletekre**
