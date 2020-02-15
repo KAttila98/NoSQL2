@@ -401,7 +401,12 @@ a `chat.html` `<body>` tagje alá közvetlen:
         </div>
         <input id="serverInput" type="text" class="form-control" placeholder="Szerver IP">
     </div>
-
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-fw fa-password"></i></span>
+        </div>
+        <input id="passwordInput" type="text" class="form-control" placeholder="Szerver Jelszó">
+    </div>
     <div class="text-center">
         <button class="btn btn-primary" onclick="chatController.login()"><i class="fa fa-fw fa-sign-in"></i>Bejelentkezés
         </button>
@@ -433,12 +438,14 @@ let myUsername = '';
 chatController.login = function () {
   let usernameInput = document.getElementById('usernameInput');
   let serverInput = document.getElementById('serverInput');
+  let passwordInput = document.getElementById('passwordInput');
+
 
   if (_.isEmpty(usernameInput.value) || _.isEmpty(serverInput.value)) {
     alert('Kérlek add meg az összes adatot!');
   } else {
     myUsername = _.escape(usernameInput.value);
-    chatService.connect(usernameInput.value, serverInput.value, function () {
+    chatService.connect(usernameInput.value, serverInput.value, passwordInput.value, function () {
         //Sikeres csatlakozás esetén
         // Screen-t váltunk (szegényember SPA-ja)
         document.getElementById('login-window').style.display = 'none';
@@ -577,7 +584,7 @@ let messages = {
 };
 
 // Csatlakozáskor hívott függvény
-chatService.connect = function (username, serverAddress, successCb, failCb, messageCallback, userCallback) {
+chatService.connect = function (username, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
   myUsername = username;
   successCb();
 };
@@ -642,9 +649,9 @@ fájlunkat az alábbiak szerint:
 * Módosítsuk a `chatService.connect` függvényt az alábbira, hogy ténylegesen csatlakozzunk is az adatbázishoz:
 ```
 // Csatlakozáskor hívott függvény
-chatService.connect = function (username, serverAddress, successCb, failCb, messageCallback, userCallback) {
+chatService.connect = function (username, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
   myUsername = username;
-  mongoose.connect('mongodb://bi-chat:bi-chat@' + serverAddress + ':27017/bi-chat?authSource=admin', {useNewUrlParser: true}).then(function () {
+  mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':27017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true}).then(function () {
     successCb();
   }, failCb);
 };
@@ -719,14 +726,14 @@ Ezek után a `chatService.connect` függvényt kell frissítenünk, írjuk át a
 
 ```
 // Csatlakozáskor hívott függvény
-chatService.connect = function (username, serverAddress, successCb, failCb, messageCallback, userCallback) {
+chatService.connect = function (username, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
   myUsername = username;
   let dbReady = false;
   let mqReady = false;
 
-  let db = mongoose.connect('mongodb://bi-chat:bi-chat@' + serverAddress + ':27017/bi-chat?authSource=admin', {useNewUrlParser: true});
+  let db = mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':27017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true});
   redisClient = redis.createClient({
-    host: serverAddress, retry_strategy: function () {
+    host: serverAddress, password: password, retry_strategy: function () {
     }
   });
 
