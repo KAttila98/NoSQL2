@@ -204,7 +204,7 @@ With a few basic commands, you can manage these from the terminal.
 * ```docker exec -it <container name> bash``` - opens a terminal in the given container.
 * [More useful commands.] (Https://devhints.io/docker)
 
-Clone or download this repo. In the repo folder, you can start the Docker container with the following commands:
+Clone or download this repo. Checkout the `eng` branch. In the repo folder, you can start the Docker container with the following commands:
 ```sh
 docker-compose -p nosql up -d
 ```
