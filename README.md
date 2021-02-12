@@ -419,7 +419,7 @@ textarea {
 
 After `npm start` command, the following window will appear if you have done everything right.
 
-![1. Feladat](readme_images/feladat1.png)
+![Task 1.](readme_images/task1.png)
 
 **Task 2.:** Let's build our application further by implementing the user interface and business logic! 
 To do this, we first add a new step to our interface, the login screen. To do this, add the following snippet of code 
@@ -669,7 +669,7 @@ If we did well, by restarting our chat application is already working, we can me
 
     Document the individual tasks as instructed in the report template.
 
-![2. Feladat](readme_images/feladat2.png)
+![Task 2.](readme_images/task2.png)
 
 ### 3.2. Database
 Now that we have a working application framework, we start with the laboratory's substantive, NoSQL part! As a first task
@@ -886,7 +886,7 @@ in each document under the `avatarUrl` field.
 
 **Tip**: Use an online avatar generator, such as https://getavataaars.com. You do not need to host the file in this case. 
 
-![3. Feladat](readme_images/feladat3.png)
+![Task 3.](readme_images/task3.png)
 
 ### 4.2. Rooms
 The chat program can handle any number of rooms, but currently only the `default` exists, and each private message room
@@ -896,7 +896,7 @@ There are documents in this collection that have one attribute, the `name`, whic
 **It is not part of this task to create the room or monitor the change!** 
 To facilitate testing, we have already created a few examples in the database.
 
-![4. Feladat](readme_images/feladat4.png)
+![Task 4.](readme_images/task4.png)
 
 ### 4.3. Observing room changes
 Add to the previous function that the application monitors the REDIS `roomlist_channel`, 
@@ -904,5 +904,5 @@ updating the room list as a result of events coming here. You can add any room f
 (for example, by adding the `connect` function to create a new room after a successful connection) 
 or by using the buttons on the interface (but this is optional, it's not an HTML / CSS lab). 
 
-![5. Feladat](readme_images/feladat5.png)
+![Task 5.](readme_images/task5.png)
 
