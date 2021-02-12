@@ -235,31 +235,31 @@ elkészítésével.
 
 ```
 <!DOCTYPE html>
-<html class="fill-vertical" lang="hu">
+<html class="fill-vertical" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chat alkalmazás</title>
+    <title>Chat application</title>
 
-    <!-- Importáljuk a Bootstrapet-->
+    <!-- Import Bootstrap-->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="chat.css">
 
 </head>
 <body class="fill-vertical">
-<!-- Chat képernyő -->
+<!-- Chat screen -->
 <div id="main-window" class="container-fluid p-0 app-window">
     <!-- Navbar -->
     <nav class="navbar navbar-expand navbar-dark bg-dark chat-nav">
         <a class="navbar-brand" href="#">
             <img src="assets/logo.png" width="100" height="36" alt="BME Aut" class="d-inline-block align-top">
-            <span class="align-middle">BI NoSQL Labor Chat alkalmazás</span>
+            <span class="align-middle">BI NoSQL Labor Chat application</span>
         </a>
     </nav>
 
-    <!-- Chat terület -->
+    <!-- Chat area -->
     <div class="row chat-body">
-        <!-- Felhasználók oszlop -->
+        <!-- Users column -->
         <div class="col-md-4">
             <div class="selector-panel">
                 <div class="selector-panel-header">
@@ -267,34 +267,34 @@ elkészítésével.
                 </div>
                 <div class="selector-panel-body">
 
-                    <b>Csatornák</b>
+                    <b>Rooms</b>
                     <ul id="room-list">
-                        <li class="selector-panel-item" onclick="chatController.changeRoom('default')">Általános</li>
+                        <li class="selector-panel-item" onclick="chatController.changeRoom('default')">General</li>
                     </ul>
 
-                    <b>Felhasználók</b>
+                    <b>Users</b>
                     <ul id="user-list">
-                        <!-- Ide jönnek a felhasználók -->
+                        <!-- Here comes the users list -->
                     </ul>
                 </div>
             </div>
         </div>
-        <!-- Középső sáv (üzenetek + üzenet írás) -->
+        <!-- Middle strip (messages + writing message) -->
         <div class="col-md-8 messages-panel">
 
-            <!-- Eddigi üzenetek a szobában -->
+            <!-- History of messages in the room -->
             <div id="messages-panel" class="row messages-panel-history">
                 <div id="messages" class="messages">
-                    <!-- Ide jönnek majd az üzenetek -->
+                    <!-- Here comes the messages -->
                 </div>
             </div>
 
-            <!-- Új üzenet írása -->
+            <!-- Write new message -->
             <div class="row messages-panel-new">
                 <div class="input-group">
                     <textarea id="new-message-text" class="form-control" aria-label="With textarea"></textarea>
                     <div class="input-group-append">
-                        <button class="btn btn-success" onclick="chatController.sendMessage()">Küldés <i
+                        <button class="btn btn-success" onclick="chatController.sendMessage()">Send <i
                                 class="fa fa-fw fa-send"></i></button>
                     </div>
                 </div>
@@ -316,14 +316,14 @@ elkészítésével.
 Illetve szintén a gyökér mappában a `chat.css`-t az alábbi tartalommal:
 
 ```
-/* A Bootstrap containerrül elvesszük a paddingot (jobban néz ki így desktopon) */
+/* Remove padding from Bootstrap container (looks nices on desktop) */
 .container-fluid{
     overflow: hidden;
     padding-right: 0;
     padding-left: 0;
 }
 
-/* Segédosztály a maximális függőleges kitöltéshez */
+/* Helper class for max. vertical fill */
 .fill-vertical {
     height: 100%;
 }
@@ -332,7 +332,7 @@ Illetve szintén a gyökér mappában a `chat.css`-t az alábbi tartalommal:
     height: 100%;
 }
 
-/* A teljes chat alkalmazásunk ablaka */
+/* Window of the whole chat application */
 .app-window {
     display: flex;
     flex-direction: column;
@@ -344,7 +344,7 @@ Illetve szintén a gyökér mappában a `chat.css`-t az alábbi tartalommal:
     height: 45px;
 }
 
-/* A felhasználók, üzenetek és új üzenet írása rész (minden a header alatt) */
+/* The users, messages and new message part (everything below the header) */
 .chat-body {
     flex-grow: 1;
 }
@@ -421,33 +421,33 @@ kiegészítjük a felületünket egy új lépéssel, a bejelentkező képernyőv
 a `chat.html` `<body>` tagje alá közvetlen:
 
 ```
-<!-- Bejelentkező képernyő -->
+<!-- Login screen -->
 <div id="login-window" class="container login-window">
     <div class="jumbotron">
-        <h1>BI Labor NoSQL Chat</h1>
-        <p>Üdv a BI Labor keretében elkészítendő chat alkalmazásban, ami a különböző NoSQL adatbázisok működését
-            demonstrálja, egy kis ízelítővel Electron-ból.</p>
+        <h1>BI Laboratory NoSQL Chat application</h1>
+        <p>Welcome to the Chat application of BI Laboratory course, demonstrating the functions of NoSQL databases 
+            and giving an introduction into Electron.</p>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-fw fa-user"></i></span>
         </div>
-        <input id="usernameInput" type="text" class="form-control" placeholder="Felhasználónév">
+        <input id="usernameInput" type="text" class="form-control" placeholder="Username">
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-fw fa-server"></i></span>
         </div>
-        <input id="serverInput" type="text" class="form-control" placeholder="Szerver IP">
+        <input id="serverInput" type="text" class="form-control" placeholder="Server IP">
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-fw fa-key"></i></span>
         </div>
-        <input id="passwordInput" type="text" class="form-control" placeholder="Szerver Jelszó">
+        <input id="passwordInput" type="text" class="form-control" placeholder="Server password">
     </div>
     <div class="text-center">
-        <button class="btn btn-primary" onclick="chatController.login()"><i class="fa fa-fw fa-sign-in"></i>Bejelentkezés
+        <button class="btn btn-primary" onclick="chatController.login()"><i class="fa fa-fw fa-sign-in"></i>Login
         </button>
     </div>
 </div>
@@ -458,7 +458,7 @@ vegyük fel ezt, valahogy így:
 
 ```
 ...
-<!-- Chat képernyő -->
+<!-- Chat screen -->
 <div id="main-window" class="container-fluid p-0 app-window" style="display:none">
 ...
 ```
@@ -469,11 +469,11 @@ const _ = require('lodash');
 
 const chatController = {};
 
-// Inicializáljuk a beállításokat
+// Initialize the settings
 let selectedRoom = 'default';
 let myUsername = '';
 
-// Bejelentkezéskor meghívódik és inicializálja a default szobát
+// Called at login and inicializes the default room
 chatController.login = function () {
   let usernameInput = document.getElementById('usernameInput');
   let serverInput = document.getElementById('serverInput');
@@ -481,42 +481,42 @@ chatController.login = function () {
 
 
   if (_.isEmpty(usernameInput.value) || _.isEmpty(serverInput.value)) {
-    alert('Kérlek add meg az összes adatot!');
+    alert('Please provide every data!');
   } else {
     myUsername = _.escape(usernameInput.value);
     chatService.connect(usernameInput.value, serverInput.value, passwordInput.value, function () {
-        //Sikeres csatlakozás esetén
-        // Screen-t váltunk (szegényember SPA-ja)
+        // Connection successful
+        // Swich screen (poorman’s SPA)
         document.getElementById('login-window').style.display = 'none';
         document.getElementById('main-window').style.display = 'flex';
 
-        // Kiírjuk a bejelentkezett felhasználó nevét
+        // Print the logged in username
         document.getElementById('username').innerText = myUsername;
         chatController.refreshUsers();
         chatController.refreshRoom();
       },
       function (err) {
-        alert("Nem sikerült csatlakozni az adatbázishoz: " + err)
+        alert("Could not connect to the database: " + err)
       },
-      // Új üzenet érkezett valahova (esemény a room_channel-ben)
+      // New message received somewhere (event on roomsChannel)
       function (roomName) {
         if (roomName === selectedRoom) {
           chatController.refreshRoom();
         }
       },
-      // Változott a felhasználók száma
+      // User number changed
       function () {
         chatController.refreshUsers();
       });
   }
 };
 
-// Megjelenít egy új üzenetet az üzenő területen
+// Print a new message at message history
 chatController.renderNewMessage = function (message) {
-  // Megkeressük a DOM-ban a "messages" ID-val rendelkező üzenő területet, ami egy rendezetlen lista (<ul>).
+  // Fing the messages history area in the DOM with ID "messages", it is an unnumbered list (<ul>).
   let messageArea = document.getElementById('messages');
 
-  // Kitöltünk és hozzáadunk egy új üzenetet a HTML sablon alapján
+  // Fill and add a new message based ont he HTML template
   messageArea.insertAdjacentHTML('beforeEnd',
     '<div class="media messages">' +
     '<img src="assets/user.png" width="40" height="40" class="mr-3 message-avatar">' +
@@ -527,28 +527,28 @@ chatController.renderNewMessage = function (message) {
     '<hr>'
   );
 
-  // Lescrollozunk az üzenetek aljára
+  // Scroll down to the bottom of the history
   document.getElementById('messages-panel').scrollTo(0, messageArea.scrollHeight);
 };
 
-// Megjelenít egy felhasználót a felhasználói területen
+// Prints a username on users list
 chatController.renderNewUser = function (user) {
   let userList = document.getElementById('user-list');
   let listedUser = _.escape(user);
 
-  // Elnevezzük a két user közötti privát chatet jelző szobát, a sorrend fontos hogy kétirányú lehessen a kommunikáció
+  // Name a private room between two users. The order is important due to two-way communication. 
   let keys = _.orderBy([myUsername, listedUser]);
   let privateRoomName = keys[0] + '_' + keys[1];
 
   if (selectedRoom === privateRoomName) {
-    // Ha már itt vagyunk nem kell linket készíteni.
+    // If we already there, no link is necessary.
     userList.insertAdjacentHTML('beforeEnd', '<li class="selector-panel-item selected"><b>' + listedUser + '</b></li>');
   } else {
     userList.insertAdjacentHTML('beforeEnd', '<li class="selector-panel-item" onclick="chatController.changeRoom(\'' + privateRoomName + '\')">' + listedUser + '</li>');
   }
 };
 
-// Új üzenetet küldünk a felhasználónkkal
+// Send a new message with our username
 chatController.sendMessage = function () {
   let textInput = document.getElementById('new-message-text');
   if (!_.isEmpty(textInput.value)) {
@@ -563,17 +563,17 @@ chatController.sendMessage = function () {
   textInput.value = '';
 };
 
-// Ha megváltoztatjuk a szobát
+// Switching room
 chatController.changeRoom = function (roomName) {
   selectedRoom = roomName;
   chatController.refreshRoom();
   chatController.refreshUsers();
 };
 
-// Frissítjük a szoba üzeneteinek tartalmát
+// Updating the messages in room
 chatController.refreshRoom = function () {
   document.getElementById('messages').innerHTML = '';
-  // Betöltjük az üzeneteket
+  // Load the messages history
   chatService.getMessages(selectedRoom, function (messages) {
     _.forEach(messages, function (message) {
       chatController.renderNewMessage(message);
@@ -581,10 +581,10 @@ chatController.refreshRoom = function () {
   });
 };
 
-// Frissítjük a felhasználói lista tartalmát
+// Update the users list content
 chatController.refreshUsers = function () {
   document.getElementById('user-list').innerHTML = '';
-  // Betöltjük a felhasználókat (magunkat nem írjuk ki)
+  // Load the users (without self)
   chatService.getUsers(function (users) {
     _.forEach(users, function (user) {
       if (myUsername !== user) {
@@ -605,48 +605,48 @@ let _ = require('lodash');
 
 const chatService = {};
 
-// A felhasználónk neve
+// Our username
 let myUsername;
 let messages = {
   default: [
     {
-      user: "Teszt Béla",
+      user: "Test John",
       date: new Date(),
-      content: "Ez egy teszt üzenet Bélától a közös szobába."
+      content: "This is a test message from John into the general room."
     },
     {
-      user: "Teszt Alíz",
+      user: "Test Jane",
       date: new Date(),
-      content: "Szia Béla!"
+      content: "Hi John!"
     },
   ]
 };
 
-// Csatlakozáskor hívott függvény
+// Function called when connecting
 chatService.connect = function (username, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
   myUsername = username;
   successCb();
 };
 
-// Lecsatlakozik a szerverről
+// Disconnect from server
 chatService.disconnect = function () {
 
 };
 
-// Visszaadja a szobában található üzeneteket
+// Returns the messages in the room
 chatService.getMessages = function (roomId, cb) {
   cb(messages[roomId]);
 };
 
-// Visszaadja a bejelentkezett usereket
+// Returns the logged in users list
 chatService.getUsers = function (cb) {
   cb([
-    "Béla",
-    "Alíz"
+    "John",
+    "Jane"
   ])
 };
 
-// Üzenetet küld
+// Send message
 chatService.sendMessage = function (roomId, message) {
   (messages[roomId] = messages[roomId] || []).push({
     user: myUsername,
@@ -674,10 +674,10 @@ perzisztáljuk az üzeneteket MongoDB-ben. Erre az alábbi adatmodellt találtuk
 ```
 Message:
 {
-    user: <String - A felhasználó neve>
-    date: <Date - Mikor küldte az üzenetet>
-    content: <String - Az üzenet tartalma>
-    room: <String - A szoba neve ahova az üzenet ment>
+    user: <String – The username>
+    date: <Date – When the message sent>
+    content: <String – Message content>
+    room: <String – The room name where the message was sent to>
 }
 ```
 
@@ -689,7 +689,7 @@ fájlunkat az alábbiak szerint:
 * Importáljuk a mongoose-t az alábbi parancs fájl elején történő elhelyezésével: `let mongoose = require('mongoose');`
 * Módosítsuk a `chatService.connect` függvényt az alábbira, hogy ténylegesen csatlakozzunk is az adatbázishoz:
 ```
-// Csatlakozáskor hívott függvény
+// Function called when connecting
 chatService.connect = function (username, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
   myUsername = username;
   mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':27017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true}).then(function () {
@@ -700,7 +700,7 @@ chatService.connect = function (username, serverAddress, password, successCb, fa
 * Definiáljuk az üzenet modelljét a mongoose számára, az alábbi deklaráció felvételével a `chatService.connect` fölötti
 sorba:
 ```
-// Az üzenet model leírása
+// Description of message model
 const Message = mongoose.model('Message', new mongoose.Schema({
   user: String,
   date: Date,
@@ -710,7 +710,7 @@ const Message = mongoose.model('Message', new mongoose.Schema({
 ```
 * Szintén írjuk át a `chatService.getMessages` függvényt, hogy az adatbázist hívja:
 ```
-// Visszaadja a szobában található üzeneteket
+// Returns the messages in the room
 chatService.getMessages = function (roomId, cb) {
   Message.find({room: roomId}, function (err, msg) {
     cb(msg)
@@ -719,7 +719,7 @@ chatService.getMessages = function (roomId, cb) {
 ```
 * Írjuk át a `chatService.sendMessage` függvényt, hogy beleírja az adatbázisba az üzenetet.
 ```
-// Üzenetet küld
+// Send message
 chatService.sendMessage = function (roomId, message) {
   let msg = new Message({
     user: myUsername,
@@ -768,7 +768,7 @@ let redisSubscriberClient;
 Ezek után a `chatService.connect` függvényt kell frissítenünk, írjuk át az alábbira:
 
 ```
-// Csatlakozáskor hívott függvény
+// Function called when connecting
 chatService.connect = function (username, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
   myUsername = username;
   let dbReady = false;
@@ -780,24 +780,24 @@ chatService.connect = function (username, serverAddress, password, successCb, fa
     }
   });
 
-  // Ha minden kapcsolat felépült
+  // If all connection is successfull
   function connectionSuccesfull() {
-    // Felvesszük magunkat az online user listára
+    // Adding self to the users list
     redisClient.zadd(usersChannel, 0, username);
-    // Szólunk a channelen hogy bejelentkeztünk
+    // Notify about our login
     redisClient.publish(usersChannel, username);
 
-    // Feliratkozunk az eseményekre amiket figyelnünk kell
-    // A subscribehoz külön kliens kell, ezért lemásoljuk az eredetit
+    // Subscribing to important events
+    // Separate clint is necessary for subscription, duplicate the original
     redisSubscriberClient = redisClient.duplicate();
     redisSubscriberClient.subscribe(roomsChannel);
     redisSubscriberClient.subscribe(usersChannel);
     redisSubscriberClient.on('message', function (channel, message) {
       if (channel === roomsChannel) {
-        // Ha a szoba channel-be érkezik üzenet azt jelenti valamelyik szobába frissíteni kell az üzeneteket
+        // New message to roomsChannel means the message history should be updated in a room
         messageCallback(message);
       } else if (channel === usersChannel) {
-        // Ha a user channelbe érkezik üzenet azt jelenti változott a user lista
+        // New message to usersChannel means the users list changed
         userCallback();
       }
     });
@@ -805,7 +805,7 @@ chatService.connect = function (username, serverAddress, password, successCb, fa
     successCb();
   }
 
-  // Nem tudjuk a kettő CB közül melyik hívódik meg előszőr, így a második után fogunk csak visszahívni
+  // We dont know which callback is called first, so we will call back after the second 
   db.then(function () {
     dbReady = true;
     if (mqReady === true) {
@@ -813,11 +813,11 @@ chatService.connect = function (username, serverAddress, password, successCb, fa
     }
   }, failCb);
 
-  // Redis kliens eseményei
+  // Redis client events
   redisClient.on('ready', function () {
     mqReady = true;
     if (dbReady === true) {
-      // Ha a DB kapcsolatot is felépítettük bejelentkezünk
+      // If MongoDB is connected, login
       connectionSuccesfull();
     }
   });
@@ -830,7 +830,7 @@ amit frissítik felületet.
 
 Szintén implementáljuk a `chatService.disconnect` függvényt is (azaz szóljunk a REDIS-nek ha bezártuk az app-ot).
 ```
-// Lecsatlakozik a szerverről
+// Disconnect from server
 chatService.disconnect = function () {
   if (!_.isUndefined(redisClient)) {
     redisClient.zrem(usersChannel, myUsername);
@@ -841,7 +841,7 @@ chatService.disconnect = function () {
 Írjuk felül a `chatService.getUsers`-t is, hogy a REDIS-ből szedje az adatokat, ehhez a ZRANGE függvényt fogjuk
 használni.
 ```
-// Visszaadja a bejelentkezett usereket
+// Returns the logged in users list
 chatService.getUsers = function (cb) {
   redisClient.zrange(usersChannel, 0, -1, function (error, result) {
     cb(result);
@@ -850,7 +850,7 @@ chatService.getUsers = function (cb) {
 ```
 Végül egészítsük ki a `chatService.sendMessage` függvényt, hogy sikeres adatbázis mentés esetén szóljon a változásról:
 ```
-// Üzenetet küld
+// Send message
 chatService.sendMessage = function (roomId, message) {
   let msg = new Message({
     user: myUsername,
@@ -859,7 +859,7 @@ chatService.sendMessage = function (roomId, message) {
     room: roomId
   });
   msg.save().then(function () {
-    // Szólunk hogy frissítettük a szobában az üzeneteket
+    // Notify about updating messages in room
     redisClient.publish(roomsChannel, roomId)
   })
 };
@@ -871,12 +871,13 @@ Ezzel végeztünk is a közös feladatokkal! A labor további részén önálló
 
 
 ## 4. Egyéni feladatok
+
+    Dokumentáljuk az egyéni feladatokat a jegyzőkönyv sablon útmutatása szerint.
+
 Az eddigi rész az elégséges határa, a 3 egyéni feladat megoldása mindegyik +1 jegyet jelent, azaz:
 * Vezetett rész + 1 megoldott egyéni = 3
 * Vezetett rész + 2 megoldott egyéni = 4
 * Vezetett rész + összes megoldott egyéni = 5
-
-    Dokumentáljuk az egyéni feladatokat a jegyzőkönyv sablon útmutatása szerint.
 
 ### 4.1. Avatarok
 Legyen lehetősége a felhasználónak saját avatar URL megadására, ezt tárolja az adatbázis a `Messages` collectionben,
