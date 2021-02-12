@@ -200,8 +200,8 @@ Docker is a container-based, small overhead virtualization technology.
 With its help, we can launch Docker containers from Docker Images, which contain a service or software. 
 With a few basic commands, you can manage these from the terminal.
 
-* `` `docker ps``` - list of running containers
-* `` `docker exec -it <container name> bash``` - opens a terminal in the given container.
+* ```docker ps``` - list of running containers
+* ```docker exec -it <container name> bash``` - opens a terminal in the given container.
 * [More useful commands.] (Https://devhints.io/docker)
 
 Clone or download this repo. In the repo folder, you can start the Docker container with the following commands:
@@ -216,9 +216,9 @@ You can see that the ports of Redis default 6379 and MongoDB default 27017 are c
 The root user data is set on MongoDB and an initialization script is run. The password is set on Redis. [More details] (https://docs.docker.com/compose/compose-file/compose-file-v3/)
 
 In the repo folder, you can download the dependencies based on the contents of the package.json file with the following commands:
-`` `sh
+```sh
 npm install
-`` `
+```
 This creates the node_modules folder within the project, which contains the installed dependencies. 
 Look at the dependencies object in the `package.json` file and compare it with the contents of the `node_modules` folder.
 
@@ -229,7 +229,7 @@ which will display the Electron application (based on `main.js`, it will load th
 The application we create in this lab is a simple chat program. Users can log in, chat with each other in the main room, 
 and send private messages to each other. The initial template for the application is provided by this repository.
 
-A forrásfájlok elkészítésére és szerkesztésére használható a [WebStorm](https://www.jetbrains.com/webstorm/) vagy bármely kódszerkesztő alkalmazás.
+You can use [WebStorm] (https://www.jetbrains.com/webstorm/) or any code editing application to create and edit source files.
 
 ### 3.1. User interface
 The first step is to render the application, this is done in simple HTML with vanilla JavaScript 
@@ -458,7 +458,7 @@ directly under the `chat.html` `<body>` tag:
 </div>
 ```
 
-Hide the chat screen with a `style =" display: none "` attribute, i.e. add it to the div with the `main-window` ID, 
+Hide the chat screen with a `style ="display: none"` attribute, i.e. add it to the div with the `main-window` ID, 
 something like this:
 
 ```
@@ -877,8 +877,8 @@ We ended up with the common tasks! The rest of the laboratory is doing individua
 
 Finishing the previous parts is the minimum for mark 2, the solution of the 3 individual problems means each +1 grade, ie:
 * Guided part + 1 solved individual task = 3
-* Guided part + 2 solved individual tasks= 4
-* Guided part + all solved individual taks = 5
+* Guided part + 2 solved individual tasks = 4
+* Guided part + all solved individual tasks = 5
 
 ### 4.1. Avatarok
 Allow the user to enter their own avatar URL, which is stored in the database in the `Messages` collection, 
