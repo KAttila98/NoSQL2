@@ -210,7 +210,7 @@ docker-compose -p nosql up -d
 ```
 (Once our work is done, the container can be stopped by `docker-compose -p nosql down`.)
 
-At first startup, the command downloads the required images and then initializes and starts the two services based on the `docker-compose.yml` file. [More details] (https://docs.docker.com/compose/compose-file/compose-file-v3/)
+At first startup, the command downloads the required images and then initializes and starts the two services based on the `docker-compose.yml` file. [More details](https://docs.docker.com/compose/compose-file/compose-file-v3/)
 
 You can see that the ports of MongoDB default `27017` and Redis default `6379` are connected to the `57017` and `56379` ports on our own machine.
 (To avoid port collisions with possible local instances and previous Docker history.
@@ -885,7 +885,7 @@ Finishing the previous parts is the minimum for mark 2, the solution of the 3 in
 * Guided part + 2 solved individual tasks = 4
 * Guided part + all solved individual tasks = 5
 
-### 4.1. Avatarok
+### 4.1. Avatars
 Allow the user to enter their own avatar URL, which is stored in the database in the `Messages` collection, 
 in each document under the `avatarUrl` field. 
 
