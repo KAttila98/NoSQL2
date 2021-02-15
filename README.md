@@ -273,7 +273,7 @@ elkészítésével.
                 </div>
                 <div class="selector-panel-body">
 
-                    <b>Csatornák</b>
+                    <b>Szobák</b>
                     <ul id="room-list">
                         <li class="selector-panel-item" onclick="chatController.changeRoom('default')">Általános</li>
                     </ul>
@@ -877,12 +877,13 @@ Ezzel végeztünk is a közös feladatokkal! A labor további részén önálló
 
 
 ## 4. Egyéni feladatok
+
+    Dokumentáljuk az egyéni feladatokat a jegyzőkönyv sablon útmutatása szerint.
+
 Az eddigi rész az elégséges határa, a 3 egyéni feladat megoldása mindegyik +1 jegyet jelent, azaz:
 * Vezetett rész + 1 megoldott egyéni = 3
 * Vezetett rész + 2 megoldott egyéni = 4
 * Vezetett rész + összes megoldott egyéni = 5
-
-    Dokumentáljuk az egyéni feladatokat a jegyzőkönyv sablon útmutatása szerint.
 
 ### 4.1. Avatarok
 Legyen lehetősége a felhasználónak saját avatar URL megadására, ezt tárolja az adatbázis a `Messages` collectionben,
