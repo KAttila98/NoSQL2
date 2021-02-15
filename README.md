@@ -208,12 +208,17 @@ Clone or download this repo. Checkout the `eng` branch. In the repo folder, you 
 ```sh
 docker-compose -p nosql up -d
 ```
-(Once our work is done, the container can be stopped by `docker-compose down`.)
+(Once our work is done, the container can be stopped by `docker-compose -p nosql down`.)
 
-At first startup, the command downloads the required images and then initializes and starts the two services based on the `docker-compose.yml` file.
+At first startup, the command downloads the required images and then initializes and starts the two services based on the `docker-compose.yml` file. [More details] (https://docs.docker.com/compose/compose-file/compose-file-v3/)
 
-You can see that the ports of Redis default 6379 and MongoDB default 27017 are connected to the same ports on our own machine (in case of a collision, it is worth rewriting). 
-The root user data is set on MongoDB and an initialization script is run. The password is set on Redis. [More details] (https://docs.docker.com/compose/compose-file/compose-file-v3/)
+You can see that the ports of MongoDB default `27017` and Redis default `6379` are connected to the `57017` and `56379` ports on our own machine.
+(To avoid port collisions with possible local instances and previous Docker history.
+In the event of a collision, the lines `XXXX:6379` and `YYYY:27017` in the `docker-compose-yml` file have to be rewritten to the desired port and the container should be restarted.
+In this case, the port numbers in the `chat-service.js` `connect` function have to also be rewritten in the `mongoose.connect(...)` and `redis.createClient({...})` function calls.)
+
+The root user data is set on MongoDB and an initialization script is run. 
+The password is set on Redis. 
 
 In the repo folder, you can download the dependencies based on the contents of the package.json file with the following commands:
 ```sh
@@ -695,7 +700,7 @@ We will use a library called mongoose for easier database communication. Modify 
 // Function called when connecting
 chatService.connect = function (username, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
   myUsername = username;
-  mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':27017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true}).then(function () {
+  mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':57017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true}).then(function () {
     successCb();
   }, failCb);
 };
@@ -776,9 +781,9 @@ chatService.connect = function (username, serverAddress, password, successCb, fa
   let dbReady = false;
   let mqReady = false;
 
-  let db = mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':27017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true});
+  let db = mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':57017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true});
   redisClient = redis.createClient({
-    host: serverAddress, password: password, retry_strategy: function () {
+    host: serverAddress, port: 56379, password: password, retry_strategy: function () {
     }
   });
 
