@@ -208,10 +208,10 @@ docker-compose -p nosql up -d
 
 Első indításkor a parancs letölti az szükséges image-ket, majd a docker-compose.yml fájl alapján inicializálja és elindítja a két szolgáltatást. [További részletek](https://docs.docker.com/compose/compose-file/compose-file-v3/)
 
-Látható, hogy a a MongoDB default 27017 és a Redis default 6379 portjai vannak összekapcsolva a saját gépünkön az 57017 és 56379 portokkal. 
+Látható, hogy a a MongoDB default `27017` és a Redis default `6379` portjai vannak összekapcsolva a saját gépünkön az `57017` és `56379` portokkal. 
 (Esetleges lokális példányokkal és korábbi Docker előzményekkel való portütközések elkerülése végett. 
-Ütközés esetén a docker-compose-yml fájlban kell az XXXX:6379 és YYYY:27017 sorokat átírni a kívánt portra és ismét elindítani a konténert. 
-Ezesetben a `chat-service.js` `connect` függvényben a `mongoose.connect(...)` és a `redis.createClient({...})` függvényhívásokban is át kell írni a portot az újra.)
+Ütközés esetén a docker-compose-yml fájlban kell az `XXXX:6379` és `YYYY:27017` sorokat átírni a kívánt portra és ismét elindítani a konténert. 
+Ezesetben vagy saját Redis és MongoDb esetén a `chat-service.js` `connect` függvényben a `mongoose.connect(...)` és a `redis.createClient({...})` függvényhívásokban is át kell írni a portokat az újakra vagy a default-ra.)
 
 MongoDB-n beállításra kerülnek a root felhasználó adatai, illetve lefut egy inicializáló szkript is. 
 Redis-en beállításra kerül a jelszó. 
