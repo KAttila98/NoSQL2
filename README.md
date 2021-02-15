@@ -204,11 +204,17 @@ Klónozzuk vagy töltsük le ezt a repot. A repo mappájában a következő para
 ```sh
 docker-compose -p nosql up -d
 ```
-(A munkánk végeztével a `docker-compose down` kiadásával lehet leállítani a konténert.)
+(A munkánk végeztével a `docker-compose -p nosql down` kiadásával lehet leállítani a konténert.)
 
-Első indításkor a parancs letölti az szükséges image-ket, majd a docker-compose.yml fájl alapján inicializálja és elindítja a két szolgáltatást. 
+Első indításkor a parancs letölti az szükséges image-ket, majd a docker-compose.yml fájl alapján inicializálja és elindítja a két szolgáltatást. [További részletek](https://docs.docker.com/compose/compose-file/compose-file-v3/)
 
-Látható, hogy a Redis default 6379 és a MongoDB default 27017 portjai vannak összekapcsolva a saját gépünkön ugyanezekkel a portokkal (ütközés eseten érdemes áírni). MongoDB-n beállításra kerülnek a root felhasználó adatai, illetve lefut egy inicializáló szkript is. Redis-en beállításra kerül a jelszó. [További részletek](https://docs.docker.com/compose/compose-file/compose-file-v3/)
+Látható, hogy a a MongoDB default 27017 és a Redis default 6379 portjai vannak összekapcsolva a saját gépünkön az 57017 és 56379 portokkal. 
+(Esetleges lokális példányokkal és korábbi Docker előzményekkel való portütközések elkerülése végett. 
+Ütközés esetén a docker-compose-yml fájlban kell az XXXX:6379 és YYYY:27017 sorokat átírni a kívánt portra és ismét elindítani a konténert. 
+Ezesetben a `chat-service.js` `connect` függvényben a `mongoose.connect(...)` és a `redis.createClient({...})` függvényhívásokban is át kell írni a portot az újra.)
+
+MongoDB-n beállításra kerülnek a root felhasználó adatai, illetve lefut egy inicializáló szkript is. 
+Redis-en beállításra kerül a jelszó. 
 
 A repo mappájában a következő parancsokkal tölthetjük le a függőségeket a package.json fájl tartalma alapján:
 ```sh
@@ -661,7 +667,7 @@ module.exports = chatService;
 ```
 
 Ha jól csináltunk, ismét elindítva az alkalmazásunkat már működik a chat, az egyes felhasználók nevére kattintva tudunk nekik
-üzenni.
+üzenni. Ekkor a belépésnél jelszó még nem kell, a szerver IP-hez beírható bármi, csak ne maradjon üresen (a validálás miatt).
 
     Dokumentáljuk az eddig elkészült állapotot a jegyzőkönyv sablon útmutatása szerint.
 
@@ -692,7 +698,7 @@ fájlunkat az alábbiak szerint:
 // Csatlakozáskor hívott függvény
 chatService.connect = function (username, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
   myUsername = username;
-  mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':27017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true}).then(function () {
+  mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':57017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true}).then(function () {
     successCb();
   }, failCb);
 };
@@ -774,9 +780,9 @@ chatService.connect = function (username, serverAddress, password, successCb, fa
   let dbReady = false;
   let mqReady = false;
 
-  let db = mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':27017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true});
+  let db = mongoose.connect('mongodb://bilabor:' + password + '@' + serverAddress + ':57017/bilabor?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true});
   redisClient = redis.createClient({
-    host: serverAddress, password: password, retry_strategy: function () {
+    host: serverAddress, port: 56379, password: password, retry_strategy: function () {
     }
   });
 
