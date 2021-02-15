@@ -187,13 +187,13 @@ if necessary use it for debugging.
 
 ## 2. Preparation
 We will use the Node Package Manager to install the dependencies (Electron, Redis and MongoDB drivers, etc.).
-Download and install [NPM] (https://nodejs.org/en/download/).
+Download and install [NPM](https://nodejs.org/en/download/).
 
 During the lab, the two databases will be run as Docker containers using Docker Compose, so they should be available in our environment.
 
-Download and install [Docker Desktop] (https://www.docker.com/products/docker-desktop).
+Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
-(You can also use [Redis] (https://redis.io/download) and [MongoDB] (https://www.mongodb.com/try/download/community) 
+(You can also use [Redis](https://redis.io/download) and [MongoDB](https://www.mongodb.com/try/download/community) 
 instead of Docker with a traditional installation with custom configuration.)
 
 Docker is a container-based, small overhead virtualization technology. 
@@ -202,7 +202,7 @@ With a few basic commands, you can manage these from the terminal.
 
 * ```docker ps``` - list of running containers
 * ```docker exec -it <container name> bash``` - opens a terminal in the given container.
-* [More useful commands.] (Https://devhints.io/docker)
+* [More useful commands.](Https://devhints.io/docker)
 
 Clone or download this repo. Checkout the `eng` branch. In the repo folder, you can start the Docker container with the following commands:
 ```sh
@@ -234,7 +234,7 @@ which will display the Electron application (based on `main.js`, it will load th
 The application we create in this lab is a simple chat program. Users can log in, chat with each other in the main room, 
 and send private messages to each other. The initial template for the application is provided by this repository.
 
-You can use [WebStorm] (https://www.jetbrains.com/webstorm/) or any code editing application to create and edit source files.
+You can use [WebStorm](https://www.jetbrains.com/webstorm/) or any code editing application to create and edit source files.
 
 ### 3.1. User interface
 The first step is to render the application, this is done in simple HTML with vanilla JavaScript 
