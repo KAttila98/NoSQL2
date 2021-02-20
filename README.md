@@ -671,6 +671,7 @@ module.exports = chatService;
 ```
 
 If we did well, by restarting our chat application is already working, we can message them by clicking on the names of each user.
+At this point, you do not need a password to log in, you can enter anything for the server's IP, just don't leave it blank (due to validation).
 
     Document the individual tasks as instructed in the report template.
 
