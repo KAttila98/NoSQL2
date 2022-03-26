@@ -33,6 +33,7 @@ chatController.login = function () {
         document.getElementById('username').innerText = myUsername;
         chatController.refreshUsers();
         chatController.refreshRoom();
+        chatController.refreshRoomList();
       },
       function (err) {
         alert("Nem sikerült csatlakozni az adatbázishoz: " + err)
@@ -92,6 +93,18 @@ chatController.renderNewUser = function (user) {
   }
 };
 
+// Megjeleníti a szobákat
+chatController.renderRoom = function (room) {
+  let roomList = document.getElementById('room-list');
+
+  if (selectedRoom === room) {
+    // Ha már itt vagyunk nem kell linket készíteni.
+    roomList.insertAdjacentHTML('beforeEnd', '<li class="selector-panel-item" onclick="chatController.changeRoom(\'' + room + '\')">' + room + '</b></li>');
+  } else {
+    roomList.insertAdjacentHTML('beforeEnd', '<li class="selector-panel-item" onclick="chatController.changeRoom(\'' + room + '\')">' + room + '</li>');
+  }
+};
+
 // Új üzenetet küldünk a felhasználónkkal
 chatController.sendMessage = function () {
   let textInput = document.getElementById('new-message-text');
@@ -113,6 +126,7 @@ chatController.changeRoom = function (roomName) {
   selectedRoom = roomName;
   chatController.refreshRoom();
   chatController.refreshUsers();
+  chatController.refreshRoomList();
 };
 
 // Frissítjük a szoba üzeneteinek tartalmát
@@ -135,6 +149,17 @@ chatController.refreshUsers = function () {
       if (myUsername !== user) {
         chatController.renderNewUser(user);
       }
+    });
+  });
+};
+
+// Frissítjük a szobákat
+chatController.refreshRoomList = function () {
+  document.getElementById('room-list').innerHTML = '';
+  // Betöltjük a felhasználókat (magunkat nem írjuk ki)
+  chatService.getRooms(function (rooms) {
+    _.forEach(rooms, function (room) {
+        chatController.renderRoom(room.name);
     });
   });
 };

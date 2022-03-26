@@ -22,6 +22,10 @@ const Message = mongoose.model('Message', new mongoose.Schema({
     avatarUrl: String
   }));
 
+  const Room = mongoose.model('Room', new mongoose.Schema({
+    name: String
+  }));
+
 // Csatlakozáskor hívott függvény
 chatService.connect = function (username, avatarURL, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
     myUsername = username;
@@ -106,6 +110,13 @@ chatService.getUsers = function (cb) {
       cb(result);
     });
   };
+
+// Visszaadja a szobákat
+chatService.getRooms = function (cb) {
+  Room.find({},'name', function (err, rooms) {
+    cb(rooms)
+  });
+};
 
 // Üzenetet küld
 chatService.sendMessage = function (roomId, message) {
