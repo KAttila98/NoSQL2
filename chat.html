@@ -69,13 +69,19 @@
 
                     <b>Szobák</b>
                     <ul id="room-list">
-                        <li class="selector-panel-item" onclick="chatController.changeRoom('default')">Általános</li>
+                        <!-- <li class="selector-panel-item" onclick="chatController.changeRoom('default')">Általános</li> -->
                     </ul>
+                    
+                    <div class="input-group mb-3">
+                        <input id="new-room-name" type="text" class="form-control" placeholder="New room name" aria-label="New room name" aria-describedby="roombutton">
+                        <button class="btn btn-primary" type="button" id="roombutton" onclick="chatController.CreateRoom()">Add</button>
+                    </div>
 
                     <b>Felhasználók</b>
                     <ul id="user-list">
                         <!-- Ide jönnek a felhasználók -->
                     </ul>
+
                 </div>
             </div>
         </div>

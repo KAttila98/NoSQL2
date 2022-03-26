@@ -4,6 +4,8 @@ let redis = require('redis');
 
 const roomsChannel = 'rooms_channel';
 const usersChannel = 'users_channel';
+const roomlistChannel = 'roomlist_channel';
+
 let redisClient;
 let redisSubscriberClient;
 
@@ -27,7 +29,7 @@ const Message = mongoose.model('Message', new mongoose.Schema({
   }));
 
 // Csatlakozáskor hívott függvény
-chatService.connect = function (username, avatarURL, serverAddress, password, successCb, failCb, messageCallback, userCallback) {
+chatService.connect = function (username, avatarURL, serverAddress, password, successCb, failCb, messageCallback, userCallback, roomlistCallback) {
     myUsername = username;
     myAvatar = avatarURL;
     let dbReady = false;
@@ -57,13 +59,16 @@ chatService.connect = function (username, avatarURL, serverAddress, password, su
       redisSubscriberClient = redisClient.duplicate();
       redisSubscriberClient.subscribe(roomsChannel);
       redisSubscriberClient.subscribe(usersChannel);
+      redisSubscriberClient.subscribe(roomlistChannel);
       redisSubscriberClient.on('message', function (channel, message) {
         if (channel === roomsChannel) {
           // Ha a szoba channel-be érkezik üzenet azt jelenti valamelyik szobába frissíteni kell az üzeneteket
           messageCallback(message);
         } else if (channel === usersChannel) {
-          // Ha a user channelbe érkezik üzenet azt jelenti változott a user lista
-          userCallback();
+            // Ha a user channelbe érkezik üzenet azt jelenti változott a user lista
+            userCallback();
+        } else if (channel == roomlistChannel){
+            roomlistCallback();
         }
       });
   
@@ -132,5 +137,15 @@ chatService.sendMessage = function (roomId, message) {
       redisClient.publish(roomsChannel, roomId)
     })
   };
+
+chatService.CreateRoom = function (roomname){
+  let room = new Room({
+    name: roomname
+  })
+  room.save().then(function () {
+    // Szólunk hogy létrehoztunk egy szobát
+    redisClient.publish(roomlistChannel, roomname)
+  })
+}
 
 module.exports = chatService;

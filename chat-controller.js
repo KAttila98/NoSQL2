@@ -47,6 +47,10 @@ chatController.login = function () {
       // Változott a felhasználók száma
       function () {
         chatController.refreshUsers();
+      },
+      // Szoba lista frissitese
+      function () {
+        chatController.refreshRoomList();
       });
   }
 };
@@ -96,10 +100,9 @@ chatController.renderNewUser = function (user) {
 // Megjeleníti a szobákat
 chatController.renderRoom = function (room) {
   let roomList = document.getElementById('room-list');
-
   if (selectedRoom === room) {
     // Ha már itt vagyunk nem kell linket készíteni.
-    roomList.insertAdjacentHTML('beforeEnd', '<li class="selector-panel-item" onclick="chatController.changeRoom(\'' + room + '\')">' + room + '</b></li>');
+    roomList.insertAdjacentHTML('beforeEnd', '<li class="selector-panel-item" onclick="chatController.changeRoom(\'' + room + '\')"><b>' + room + '</b></li>');
   } else {
     roomList.insertAdjacentHTML('beforeEnd', '<li class="selector-panel-item" onclick="chatController.changeRoom(\'' + room + '\')">' + room + '</li>');
   }
@@ -163,5 +166,14 @@ chatController.refreshRoomList = function () {
     });
   });
 };
+
+chatController.CreateRoom = function () {
+  let roomname = document.getElementById('new-room-name');
+  if (!_.isEmpty(roomname.value)) {
+    chatController.renderRoom(roomname.value);
+    chatService.CreateRoom(roomname.value);
+  }
+  roomname.value = '';
+}
 
 module.exports = chatController;
